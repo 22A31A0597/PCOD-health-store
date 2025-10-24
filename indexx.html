@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serotonin desserts-Where Health Meets Happiness</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Pacifio", sans-serif;
+    }
+    body {
+      color: #333;
+      background: #fff;
+    }
+    /* Navbar */
+    header {
+      background: rgba(237, 231, 231, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+  display: flex; 
+  font-family: cursive;          
+  align-items: center;     
+  font-size: 30px;       /* title font size */
+  color: #7a3b02;              
+}
+    nav a {
+      text-decoration: none;
+      margin: 0 15px;
+      color: #333;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #333;
+    }
+    /* Hero Section */
+    .hero {
+      background: url(bg3.jpg)
+        no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: rgb(249, 249, 249);
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h2 {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      color: #7a3b02;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: #7a3b02;
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 5px rgba(63, 41, 41, 0.6);
+    }
+
+    .hero button {
+      font-family: sans-serif;
+      background: white;
+      color: #7a3b02;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .hero button:hover {
+      background: #9a540c;
+    }
+
+    /* About Section */
+    section.about {
+      padding: 100px 20px 50px;
+      text-align: center;
+      background: rgba(246, 231, 206, 0.297);
+    }
+
+    .about h2 {
+      font-family: cursive;
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #7a3b02;
+    }
+
+    .about p {
+      font-family: cursive;
+      font-size: 18px;
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: normal;
+      color: #555;
+    }
+    /* Menu Section */
+section.menu {
+  padding: 80px 20px;
+  background: rgb(249, 249, 249);
+  text-align: center;
+}
+
+.menu h2 {
+  font-family: cursive;
+  color: #7a3b02;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.menu-items {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: medium;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.menu-item {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: medium;
+  background: #fffaf3;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  padding: 50px;
+  transition: 0.3s;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+}
+
+.menu-item h3 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: large;
+  color: #7a3b02;
+  margin-bottom: 8px;
+}
+
+.menu-item p {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: large;
+  color: #444;
+  font-size: 20px;
+}
+    /* Product Section */
+    section.products {
+      padding: 60px 20px;
+      background: url(bg3.jpg);
+      text-align: center;
+    }
+    .products h2 {
+      font-family: cursive;
+      color: #7a3b02;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    .product-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+
+    .product-card {
+      background: #fffaf3;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 280px;
+      padding: 20px;
+      transition: 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 15px;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .product-card h3 {
+      margin: 15px 0 5px;
+      color: #7a3b02;
+    }
+
+    .product-card p {
+      color: #444;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .product-card button {
+      background: #7a3b02;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .product-card button:hover {
+      background: #9a540c;
+    }
+
+    /* Footer */
+    footer {
+      background: #7a3b02;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      nav {
+        margin-top: 10px;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .product-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+   <link rel="icon" href="logo,png (1).jpg" type="image/png">
+</head>
+<body>
+  <header>
+    <img src="logo,png (1).jpg" alt="image/png">
+    <h1>Serotonin desserts-Your happy hormone in every bite</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#products">Products</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  <section class="hero" id="home">
+    <h2>PCOD Laddoos - Doctor curated!</h2>
+    <p>Delicious laddoos curated specially for PCOD balance and women’s wellness.</p>
+    <button onclick="window.location.href='indexx.html#products'">Order Now</button>
+  </section>
+  <section class="about" id="about">
+    <h2>About Us</h2>
+    <p>
+      Our PCOD Laddoos are curated by a certified doctor.
+      Made with pure ingredients like seeds, dates, desi cow ghee— every bite supports your hormonal balance naturally.
+      NO artificial sweeteners, NO preservatives, NO sugars!!
+    </p>
+  </section>
+  <section class="menu" id="menu">
+  <h2>Our Menu</h2>
+  <div class="menu-items">
+    <div class="menu-item">
+      <h3>PCOD Power Laddoo</h3>
+      <p>Made with healthy seeds along with dates for hormone balance. </p>
+      <p><strong> CURATED BY A DOCTOR</strong></p>
+  </div>
+</section>
+  <section class="products" id="products">
+    <h2>Our Products</h2>
+    <div class="product-container">
+      <div class="product-card">
+        <img src="250g.jpg" alt="250g Laddoo" />
+        <h3>PCOD Ladoo Small Box
+          (9-10)</h3>
+        <p>Perfect for beginners! Start your healthy journey.</p>
+        <button onclick="window.location.href='cart.html?product=250g'">Order Now</button>
+      </div>
+      <div class="product-card">
+        <img src="500g.jpg" alt="500g Laddoo" />
+        <h3>PCOD Ladoo Medium Box
+            (15-18)</h3>
+        <p>Your 2 week PCOD wellness refuel.</p>
+        <button onclick="window.location.href='cart.html?product=500g'">Order Now</button>
+      </div>
+      <div class="product-card">
+        <img src="1kg.png" alt="1kg Laddoo" />
+        <h3>PCOD Ladoo Large Box
+            (30-32)</h3>
+        <p>Balanced portion for a month of wellness.</p>
+        <button onclick="window.location.href='cart.html?product=1kg'">Order Now</button>
+      </div>
+    </div>
+  </section>
+  <footer id="contact">
+    <p>📍 Kakinada, Andhra pradesh, India | 📞 +91 6303227377 | ✉️ nvworld29@gmail.com</p>
+    <p>© 2025 PCOD Laddoos. All rights reserved.</p>
+  </footer>
+</body>
+</html>

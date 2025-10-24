@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart - Serotonin Desserts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fffaf3;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #7a3b02;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .cart-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-name {
+      flex: 2;
+    }
+
+    .cart-item-price {
+      flex: 1;
+      text-align: right;
+      margin-right: 10px;
+    }
+
+    .quantity {
+      width: 50px;
+      padding: 5px;
+      text-align: center;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .total {
+      text-align: right;
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #7a3b02;
+    }
+
+    .checkout-btn, .add-more-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      text-align: center;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s ease;
+    }
+
+    .checkout-btn {
+      background: #7a3b02;
+      color: white;
+    }
+
+    .checkout-btn:hover {
+      background: #9a540c;
+      transform: scale(1.05);
+    }
+
+    .add-more-btn {
+      background: #ffb347;
+      color: white;
+    }
+
+    .add-more-btn:hover {
+      background: #ffa500;
+      transform: scale(1.05);
+    }
+
+    #suggestions {
+      margin-top: 20px;
+    }
+
+    .suggestion-items {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .suggestion-item {
+      text-align: center;
+      cursor: pointer;
+      background: #fffaf3;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 130px;
+      transition: 0.3s;
+    }
+
+    .suggestion-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .suggestion-item img {
+      width: 100px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Your Cart</h1>
+  <div class="cart-container" id="cart-container">
+    <div class="total">
+      Total: ₹<span id="total-price">0</span>
+    </div>
+    <button class="add-more-btn" id="show-suggestions-btn">Add More Items</button>
+    <div id="suggestions" style="display:none;">
+      <h3 style="color:#7a3b02; text-align:center;">You might like:</h3>
+      <div class="suggestion-items">
+        <div class="suggestion-item" data-product="250g">
+          <img src="250g.jpg" alt="250g Laddoo">
+          <p>PCOD Ladoo - Small</p>
+          <p>₹319</p>
+        </div>
+        <div class="suggestion-item" data-product="500g">
+          <img src="500g.jpg" alt="500g Laddoo">
+          <p>PCOD Laddoo - Medium</p>
+          <p>₹599</p>
+        </div>
+        <div class="suggestion-item" data-product="1kg">
+          <img src="1kg.png" alt="1kg Laddoo">
+          <p>PCOD Ladoo - Large</p>
+          <p>₹899</p>
+        </div>
+      </div>
+    </div>
+    <button class="checkout-btn">Proceed to Checkout</button>
+  </div>
+  <script>
+    const showBtn = document.getElementById('show-suggestions-btn');
+    const suggestions = document.getElementById('suggestions');
+    // Toggle suggestions section
+    showBtn.addEventListener('click', () => {
+      suggestions.style.display = suggestions.style.display === 'none' ? 'block' : 'none';
+    });
+    const urlParams = new URLSearchParams(window.location.search);
+    const productKeyFromURL = urlParams.get('product');
+    // Product data
+    const productsData = {
+      '250g': { name: 'PCOD Ladoo - Small', price: 319 },
+      '500g': { name: 'PCOD Ladoo - Medium', price: 599 },
+      '1kg': { name: 'PCOD Ladoo - Large', price: 899 }
+    };
+    let cartItems = []; 
+    if(productKeyFromURL && productsData[productKeyFromURL]){
+      cartItems.push({ ...productsData[productKeyFromURL], quantity: 1 });
+    }
+    const cartContainer = document.getElementById('cart-container');
+    const totalPriceElem = document.getElementById('total-price');
+    function renderCart() {
+      // Remove old cart items
+      cartContainer.querySelectorAll('.cart-item').forEach(e => e.remove());
+      let total = 0;
+      cartItems.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML = `
+          <div class="cart-item-name">${item.name}</div>
+          <input type="number" class="quantity" value="${item.quantity}" min="0" data-index="${index}">
+          <div class="cart-item-price">₹${item.price}</div>
+        `;
+        cartContainer.insertBefore(div, cartContainer.querySelector('.total'));
+        total += item.price * item.quantity;
+      });
+      totalPriceElem.textContent = total;
+      // Quantity input events
+      document.querySelectorAll('.quantity').forEach(input => {
+        input.addEventListener('input', e => {
+          const idx = e.target.dataset.index;
+          cartItems[idx].quantity = parseInt(e.target.value) || 1;
+          renderCart();
+        });
+      });
+    }
+    // Suggestion click -> add to cart
+    document.querySelectorAll('.suggestion-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const key = item.dataset.product;
+        const existing = cartItems.find(ci => ci.name === productsData[key].name);
+        if (existing) {
+          existing.quantity += 1;
+        } else {
+          cartItems.push({ ...productsData[key], quantity: 0 });
+        }
+        renderCart();
+      });
+    });
+    // Checkout button
+    document.querySelector('.checkout-btn').addEventListener('click', () => {
+      if(cartItems.length === 0){
+        alert('Your cart is empty!');
+      } else {
+        alert('Thank you for your order! Redirecting to payment...');
+      }
+    });
+    renderCart(); // initial render
+  </script>
+</body>
+</html>
